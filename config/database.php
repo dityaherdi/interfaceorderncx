@@ -91,7 +91,7 @@ return [
             'prefix_indexes' => true,
         ],
 
-        // TNS Configuration
+        // Oracle DB Connection using TNS Configuration 
         // 'oracle' => [
         //     'driver'        => 'oracle',
         //     'tns'           => env('DB_TNS', ''),
@@ -106,7 +106,7 @@ return [
         //     'edition'       => env('DB_EDITION', 'ora$base'),
         // ],
 
-        // Service
+        // Oracle DB Connection using Service Name
         'oracle' => [
             'driver' => 'oracle',
             'host' => env('DB_HOST', ''),
