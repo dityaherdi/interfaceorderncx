@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Test;
-use DB;
+use Illuminate\Support\Facades\DB;
+use App\Helpers\TypeHelper;
 
-class TestController extends Controller
+class CheckOrderController extends Controller
 {
-    public function testConnection()
+    public function checkOrderByCustomerRef(Request $request)
     {
-        // $test = Test::all();
-        // return view('index', compact('test'));
-        $inputValues = '88836454578';
+        // $inputValues = '88836454578';
+        $inputValues = $request->custRef;
+
+        // working by manually inject value into sql query
         $sql = "with temp_custeventsource as (
             SELECT customer_ref, product_seq, event_source, event_source_txt
                  , LISTAGG(rating_tariff_id, ',')
@@ -20,9 +21,9 @@ class TestController extends Controller
                      AS rating_tariff
                  , LISTAGG(event_type_id, ',')
                      WITHIN GROUP (ORDER BY customer_ref, product_seq, event_source, event_source_txt) 
-                     AS event_type    
+                     AS event_type
             FROM custeventsource
-            where customer_ref = '88836454578'
+            where customer_ref = "."'".$inputValues."'"."
             and (end_dtm is null or trunc(end_dtm) > last_day(add_months(sysdate,-2)))
             GROUP BY customer_ref, product_seq, event_source, event_source_txt
             ), 
@@ -35,14 +36,14 @@ class TestController extends Controller
                      WITHIN GROUP (ORDER BY customer_ref, product_seq, product_attribute_subid) 
                      AS attribute_subid  
             FROM custproductattrdetails
-            where customer_ref = '88836454578'
+            where customer_ref = "."'".$inputValues."'"."
             and (end_dat is null or trunc(end_dat) > last_day(add_months(sysdate,-2)))
             GROUP BY customer_ref, product_seq
             ),
             temp_productaddress as (
             select a.customer_ref, a.product_seq, a.address_seq
             , b.address_1||','||b.address_2||','||b.address_3||','||b.address_4||','||b.address_5||','||b.zipcode||','||c.country_name as address
-            from custproductaddress a, address b, country c where a.customer_ref = '88836454578'
+            from custproductaddress a, address b, country c where a.customer_ref = "."'".$inputValues."'"."
             and a.customer_ref = b.customer_ref and a.address_seq = b.address_seq
             and b.country_id = c.country_id
             ),
@@ -50,7 +51,7 @@ class TestController extends Controller
             (
             SELECT distinct customer_ref, product_seq
             , max(effective_dtm) over (partition by customer_ref, product_seq)  as effective_dtm
-            FROM custproductstatus where customer_ref = '88836454578'
+            FROM custproductstatus where customer_ref = "."'".$inputValues."'"."
             order by 1,2
             )
             select a.customer_ref, c.account_num, to_number(a.product_seq) product_seq, a.parent_product_seq
@@ -65,7 +66,7 @@ class TestController extends Controller
             , custhasproduct a
             left join temp_custeventsource e on a.customer_ref = e.customer_ref and a.product_seq = e.product_seq
             left join temp_productaddress k on a.customer_ref = k.customer_ref and a.product_seq = k.product_seq
-            where a.customer_ref = '88836454578'
+            where a.customer_ref = "."'".$inputValues."'"."
             and a.customer_ref = b.customer_ref and a.product_seq = b.product_seq 
             and exists 
               (
@@ -94,15 +95,14 @@ class TestController extends Controller
             , a.otc_mny/10
             , 0, null, null, null, null
             from account z, acchasonetimecharge a, contractedpointofsupply b, BULKIMPORTER.MAP_OTC@tibsprod2 c, ods_isiska.ca_ticket@tibsprod2 d 
-            where z.customer_ref = '88836454578'
+            where z.customer_ref = "."'".$inputValues."'"."
             and a.account_num = z.account_num
             and a.cps_id = b.cps_id
             and a.otc_id = c.otc_id
             and c.id_ticket = d.id_ticket
             order by 2,3,status_dtm";
-
+        
         $res = DB::select(DB::raw($sql));
-        // dd($res);
-        return view('index', compact('res'));
+        return view('index', compact('res', 'inputValues'));
     }
 }
