@@ -33,8 +33,6 @@ class CheckOrderController extends Controller
 
     public function orderByNoCustomer($inputValues)
     {
-        // dd($inputValues);
-
         // working by manually inject value into sql query
         $sql = "with temp_custeventsource as (
             SELECT customer_ref, product_seq, event_source, event_source_txt
@@ -135,6 +133,7 @@ class CheckOrderController extends Controller
 
     public function orderByNoPelayanan($inputValues)
     {
-        dd($inputValues);
+        // dd($inputValues);
+        $inputValues = '111607111959';
     }   
 }
