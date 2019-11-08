@@ -23,10 +23,11 @@
         @csrf
         <div class="input-group">
           <input type="text" name="custRef" class="form-control" id="searchForm" placeholder="Nomor Customer">
+          <input type="hidden" name="refType" value="nCust">
             <div class="input-group-prepend">
               <button type="submit" class="btn btn-danger btn-sm ml-2">
-                  <i class="material-icons">search</i> Find Order
-                </button>
+                <i class="material-icons">search</i> Find Order
+              </button>
             </div>
         </div>
       </form>
@@ -36,6 +37,7 @@
         @csrf
         <div class="input-group">
           <input type="text" name="custRef" class="form-control" id="searchForm" placeholder="Nomor Account">
+          <input type="hidden" name="refType" value="nAcc">
             <div class="input-group-prepend">
               <button type="submit" class="btn btn-danger btn-sm ml-2">
                   <i class="material-icons">search</i> Find Order
@@ -49,6 +51,7 @@
         @csrf
         <div class="input-group">
           <input type="text" name="custRef" class="form-control" id="searchForm" placeholder="Nomor Pelayanan">
+          <input type="hidden" name="refType" value="nPel">
             <div class="input-group-prepend">
               <button type="submit" class="btn btn-danger btn-sm ml-2">
                   <i class="material-icons">search</i> Find Order

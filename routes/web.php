@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('order/custref', 'CheckOrderController@checkOrderByCustomerRef')->name('order:byCustRef');
-Route::match(['get', 'post'], 'order/custref', 'CheckOrderController@checkOrderByCustomerRef')->name('order:byCustRef');
+// Route::get('order/custref', 'CheckOrderController@checkOrder')->name('order:byCustRef');
+Route::match(['get', 'post'], 'order/custref', 'CheckOrderController@checkOrder')->name('order:byCustRef');
 
-Route::get('test', 'TestController@testConnection')->name('db:test');
+// Route::get('test', 'TestController@testConnection')->name('db:test');
 
 Route::get('/template', function () {
     return view('template');

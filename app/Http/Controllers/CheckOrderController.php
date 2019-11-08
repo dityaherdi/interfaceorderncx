@@ -8,10 +8,32 @@ use App\Helpers\TypeHelper;
 
 class CheckOrderController extends Controller
 {
-    public function checkOrderByCustomerRef(Request $request)
+    public function checkOrder(Request $request)
     {
         // $inputValues = '88836454578';
+
         $inputValues = $request->custRef;
+        $type = $request->refType;
+
+        switch ($type) {
+            case 'nCust':
+                return $this->orderByNoCustomer($inputValues);
+                // break;
+            case 'nAcc':
+                return $this->orderByNoPelanggan($inputValues);
+                // break;
+            case 'nPel':
+                return $this->orderByNoPelayanan($inputValues);
+                // break;
+            default:
+                return view('index');                
+                break;
+        }
+    }
+
+    public function orderByNoCustomer($inputValues)
+    {
+        // dd($inputValues);
 
         // working by manually inject value into sql query
         $sql = "with temp_custeventsource as (
@@ -105,4 +127,14 @@ class CheckOrderController extends Controller
         $res = DB::select(DB::raw($sql));
         return view('index', compact('res', 'inputValues'));
     }
+
+    public function orderByNoPelanggan($inputValues)
+    {
+        dd($inputValues);
+    }
+
+    public function orderByNoPelayanan($inputValues)
+    {
+        dd($inputValues);
+    }   
 }
