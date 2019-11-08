@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">NCX Order</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -15,19 +15,20 @@
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li> --}}
-      <li class="nav-item dropdown">
+      
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownNavbar1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
         <div class="dropdown-menu" aria-labelledby="dropdownNavbar1">
           <a class="dropdown-item" href="#">1</a>
           <a class="dropdown-item" href="#">2</a>
           <a class="dropdown-item" href="#">3</a>
         </div>
-      </li>
+      </li> --}}
     </ul>
     {{-- <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
     </form> --}}
-    <button class="btn btn-danger my-2 my-sm-0">Ini Tombol</button>
+    {{-- <button class="btn btn-danger my-2 my-sm-0">Ini Tombol</button> --}}
   </div>
 </nav>

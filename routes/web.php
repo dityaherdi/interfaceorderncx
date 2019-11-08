@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 // Route::get('order/custref', 'CheckOrderController@checkOrder')->name('order:byCustRef');
-Route::match(['get', 'post'], 'order/custref', 'CheckOrderController@checkOrder')->name('order:byCustRef');
+Route::match(['get', 'post'], 'order', 'CheckOrderController@checkOrder')->name('order:byCustRef');
 
 // Route::get('test', 'TestController@testConnection')->name('db:test');
 

@@ -10,9 +10,9 @@
     <li class="nav-item">
       <a class="nav-link active" id="customerTab" data-toggle="tab" href="#customerSection" role="tab" aria-controls="home" aria-selected="true">Nomor Customer</a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <a class="nav-link" id="accountTab" data-toggle="tab" href="#accountSection" role="tab" aria-controls="profile" aria-selected="false">Nomor Account</a>
-    </li>
+    </li> --}}
     <li class="nav-item">
       <a class="nav-link" id="pelayananTab" data-toggle="tab" href="#pelayananSection" role="tab" aria-controls="contact" aria-selected="false">Nomor Pelayanan</a>
     </li>
@@ -32,7 +32,7 @@
         </div>
       </form>
     </div>
-    <div class="tab-pane fade" id="accountSection" role="tabpanel" aria-labelledby="accountTab">
+    {{-- <div class="tab-pane fade" id="accountSection" role="tabpanel" aria-labelledby="accountTab">
       <form action="{{ route('order:byCustRef') }}" method="POST" class="mt-3">
         @csrf
         <div class="input-group">
@@ -45,7 +45,7 @@
             </div>
         </div>
       </form>
-    </div>
+    </div> --}}
     <div class="tab-pane fade" id="pelayananSection" role="tabpanel" aria-labelledby="pelayananTab">
       <form action="{{ route('order:byCustRef') }}" method="POST" class="mt-3">
         @csrf
@@ -64,7 +64,7 @@
 <hr>
 <div class="d-flex justify-content-between align-items-center">
   @isset($inputValues)
-    <h4>Results : '{{ $inputValues }}'</h4>
+    <h4>Search results for '{{ $inputValues }}'</h4>
   @endisset
 </div>
 <div class="table-responsive">
